@@ -15,21 +15,24 @@ import java.util.Set;
 
 public class spigpass extends JavaPlugin implements Listener {
 
-    private static final String PASSWORD = "meow123"; // Change this!
+    private static final String PASSWORD = "meow123";
     private final Set<String> authenticatedPlayers = new HashSet<>();
 
     @Override
     public void onEnable() {
         Bukkit.getPluginManager().registerEvents(this, this);
+        getLogger().info("SpigPass Plugin Enabled!");
     }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        player.sendMessage(ChatColor.RED + "This server is password protected. Use /password <password> to gain access.");
-        player.setInvulnerable(true);
-        player.setAllowFlight(true);
-        player.setFlying(true);
+        if (!authenticatedPlayers.contains(player.getName())) {
+            player.sendMessage(ChatColor.RED + "This server is password protected. Use /password <password> to gain access.");
+            player.setInvulnerable(true);
+            player.setAllowFlight(true);
+            player.setFlying(true);
+        }
     }
 
     @Override
@@ -41,6 +44,7 @@ public class spigpass extends JavaPlugin implements Listener {
                 player.sendMessage(ChatColor.GREEN + "Access granted!");
                 player.setInvulnerable(false);
                 player.setAllowFlight(false);
+                player.setFlying(false);
                 return true;
             } else {
                 player.kickPlayer(ChatColor.RED + "Incorrect password!");
