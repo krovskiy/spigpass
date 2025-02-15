@@ -37,8 +37,7 @@ public class spigpass extends JavaPlugin implements Listener {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (command.getName().equalsIgnoreCase("password") && sender instanceof Player) {
-            Player player = (Player) sender;
+        if (command.getName().equalsIgnoreCase("password") && sender instanceof Player player) {
             if (args.length == 1 && args[0].equals(PASSWORD)) {
                 authenticatedPlayers.add(player.getName());
                 player.sendMessage(ChatColor.GREEN + "Access granted!");
