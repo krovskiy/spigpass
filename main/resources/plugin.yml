@@ -2,11 +2,3 @@ name: SpigPass
 main: me.dima.spigpass.spigpass
 version: 1.0-SNAPSHOT
 api-version: 1.17
-commands:
-  password:
-    description: Authenticate with a password
-    usage: /password <password>
-permissions:
-  spigpass.password:
-    description: Allows the player to use the /password command
-    default: op
